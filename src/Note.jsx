@@ -1,4 +1,23 @@
+import { useState } from "react"
+
 function Note() {
+
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
+
+    const [note, setNote] = useState({})
+
+    const date = new Date()
+
+    const saveNote = () => {
+        setNote({
+            ...note,
+            title: title,
+            content: content,
+            date: date
+            })
+    }
+
     return (
         <>
         
@@ -8,16 +27,20 @@ function Note() {
                 ← Back to Notes
             </button>
             
-            <h1 className="font-bold text-4xl p-4">React Learning</h1>
+            <input placeholder="Title" value={title} 
+                onChange={(e) => setTitle(e.target.value)}  
+                className="font-bold text-4xl p-4" />
             <hr className="border-gray-300"/>
-            <p className="p-4 text-gray-700 leading-relaxed">
-                Learn useState <br />
-                Learn useEffect<br />
-                Practice React Projects
-            </p>
+            
+            <textarea value={content}
+                onChange={(e) => setContent(e.target.value)} 
+                className="p-4 text-gray-700 leading-relaxed" />
+            
+            <button onClick={saveNote}
+             className="bg-blue-500 rounded w-20 text-white p-1">Save</button>
             <hr className="border-gray-300"/>
             <p className="text-gray-500">
-                Created: June 9, 2026 . 10:30 AM
+                {date.toLocaleString()}
             </p>
             <div className="flex gap-3">
                 <button className="bg-blue-500 rounded w-20 text-white p-1">
