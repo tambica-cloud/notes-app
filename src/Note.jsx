@@ -1,21 +1,27 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { NotesContext } from "./context/NotesContext"
 
 function Note() {
+    const navigate = useNavigate()
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
 
-    const [note, setNote] = useState({})
+    const { notes, setNotes } = useContext(NotesContext)
 
     const date = new Date()
 
     const saveNote = () => {
-        setNote({
-            ...note,
-            title: title,
-            content: content,
-            date: date
-            })
+       
+        setNotes([...notes,
+            {
+                title: title,
+                content: content,
+                date: date
+            }
+         ])
+        navigate('/')
     }
 
     return (
@@ -23,7 +29,8 @@ function Note() {
         
         <div className="flex flex-col max-w-3xl mx-auto gap-4 border
         border-gray-400 rounded-lg p-6 m-4 shadow-md">
-            <button className="text-blue-500 font-medium self-start">
+            <button onClick={() => navigate('/')}
+             className="text-blue-500 font-medium self-start">
                 ← Back to Notes
             </button>
             
