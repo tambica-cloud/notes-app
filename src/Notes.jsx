@@ -7,6 +7,10 @@ function Notes() {
     const navigate = useNavigate()
     const { notes } = useContext(NotesContext)
 
+    const displayNote = (index) => {
+         navigate(`/note/${index}`)
+    }
+
     return (
         <>
         <div className="flex flex-col border border-gray-400 rounded-lg 
@@ -18,8 +22,8 @@ function Notes() {
                     + Add Note</button>
             </div>
             {notes.map((note, index) => (
-                <div key={index} className="flex flex-col md:flex-row border border-gray-400 rounded-lg m-4 p-4 
-                    cursor-pointer justify-between">
+                <div onClick={() => displayNote(index)} key={index} className="flex flex-col md:flex-row border border-gray-400 rounded-lg m-4 p-4 
+                    cursor-pointer justify-between hover:bg-gray-50">
                     <div>
                         <span className="font-bold text-lg">{note.title}</span><br />
                         <span className="text-gray-400">
@@ -27,21 +31,9 @@ function Notes() {
                         </span>
                     </div>
                     <p className="text-gray-500">
-                        {note.date.toLocaleString()}</p>
+                        {new Date(note.date).toLocaleString()}</p>
                 </div>
             ))}
-                
-                {/* <div className="flex flex-col md:flex-row border border-gray-400 rounded-lg m-4 p-4 
-                    cursor-pointer justify-between ">
-                    <div>
-                        <span className="font-bold text-lg">Shopping List</span><br />
-                        <span className="text-gray-400">
-                            Milk, Bread, Eggs, Fruits, Vegetables, Rice, Dal
-                        </span>
-                    </div>
-                    <p className="text-gray-500">
-                        June 9, 2026 . 10:30 PM</p>
-                </div> */}
             
         </div>
             

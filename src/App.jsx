@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Notes />} />
         <Route path='/note/new' element={<Note />} />
+        <Route path='/note/:id' element={<Note />} />
       </Routes>
     </BrowserRouter>
     </>
